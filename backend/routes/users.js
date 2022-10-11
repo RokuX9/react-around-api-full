@@ -1,5 +1,5 @@
-const router = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 
 const {
   getUsers,
@@ -7,31 +7,31 @@ const {
   getUserById,
   updateProfile,
   updateAvatar,
-} = require("../controllers/user");
+} = require('../controllers/user');
 
-router.get("/", getUsers);
-router.get("/me", getMe);
-router.get("/:id", getUserById);
+router.get('/', getUsers);
+router.get('/me', getMe);
+router.get('/:id', getUserById);
 router.patch(
-  "/me",
+  '/me',
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
     }),
   }),
-  updateProfile
+  updateProfile,
 );
 router.patch(
-  "/me/avatar",
+  '/me/avatar',
   celebrate({
     body: Joi.object().keys({
       avatar: Joi.string().pattern(
-        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\u002b~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\u002b.~#?&//=]*)/
+        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\u002b~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\u002b.~#?&//=]*)/,
       ),
     }),
   }),
-  updateAvatar
+  updateAvatar,
 );
 
 module.exports = router;

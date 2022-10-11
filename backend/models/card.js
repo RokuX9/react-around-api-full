@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { customErrors } = require("../utils/utils");
+const mongoose = require('mongoose');
+const { customErrors } = require('../utils/utils');
 
 const cardSchema = mongoose.Schema({
   name: {
@@ -14,7 +14,7 @@ const cardSchema = mongoose.Schema({
     validate: {
       validator(v) {
         return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\u002b~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\u002b.~#?&//=]*)/.test(
-          v
+          v,
         );
       },
       message: (props) => `${props.value} is not a valid URL`,
@@ -25,7 +25,7 @@ const cardSchema = mongoose.Schema({
     required: true,
   },
   likes: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     default: [],
   },
   createdAt: {
@@ -36,16 +36,13 @@ const cardSchema = mongoose.Schema({
 
 cardSchema.statics.deleteCardByOwnerAndId = function deleteCardByOwnerAndId(
   id,
-  owner
+  owner,
 ) {
   return this.findById({ _id: id })
     .orFail(customErrors.notFound())
-    .then((card) => {
-      console.log(card.owner.toString());
-      return card.owner.toString() === owner
-        ? this.findByIdAndDelete(id)
-        : Promise.reject(customErrors.notAuthorized());
-    });
+    .then((card) => (card.owner.toString() === owner
+      ? this.findByIdAndDelete(id)
+      : Promise.reject(customErrors.notAuthorized())));
 };
 
-module.exports = mongoose.model("card", cardSchema);
+module.exports = mongoose.model('card', cardSchema);

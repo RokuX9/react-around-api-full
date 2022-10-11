@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const User = require("../models/user");
-const { responseStatus, customErrors } = require("../utils/utils");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const { responseStatus, customErrors } = require('../utils/utils');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -11,13 +11,12 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getMe = (req, res, next) => {
-  console.log(req.user);
   const { _id } = req.user;
   User.findOne({ _id })
     .orFail(customErrors.notFound)
     .then((user) => res.status(responseStatus.success.code).send(user))
     .catch((err) => {
-      if (err.name === "CastError") {
+      if (err.name === 'CastError') {
         next(customErrors.badRequest(err.message));
       }
       next(err);
@@ -30,7 +29,7 @@ module.exports.getUserById = (req, res, next) => {
     .orFail(customErrors.notFound())
     .then((user) => res.status(responseStatus.success.code).send(user))
     .catch((err) => {
-      if (err.name === "CastError") {
+      if (err.name === 'CastError') {
         next(customErrors.badRequest(err.message));
       }
       next(err);
@@ -38,13 +37,21 @@ module.exports.getUserById = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
   bcrypt
     .hash(password, 10)
-    .then((hash) => User.create({ name, about, avatar, email, password: hash }))
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => res.status(responseStatus.success.code).send(user))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         next(customErrors.badRequest(err.message));
       }
       next(err);
@@ -57,12 +64,12 @@ module.exports.updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(
     _id,
     { name, about },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   )
     .orFail(customErrors.notFound())
     .then((user) => res.status(200).send(user))
     .catch((err) => {
-      if (err.name === "ValidationError" || err.name === "CastError") {
+      if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(customErrors.badRequest(err.message));
       }
       next(err);
@@ -76,7 +83,7 @@ module.exports.updateAvatar = (req, res, next) => {
     .orFail(customErrors.notFound())
     .then((user) => res.status(responseStatus.success.code).send(user))
     .catch((err) => {
-      if (err.name === "ValidationError" || err.name === "CastError") {
+      if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(customErrors.badRequest(err.message));
       }
       next(err);
@@ -91,7 +98,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        JWT_SECRET ? JWT_SECRET : "GamAniHohevHanime"
+        JWT_SECRET || 'GamAniHohevHanime',
       );
       res.send({ token });
     })

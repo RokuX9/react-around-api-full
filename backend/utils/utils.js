@@ -8,11 +8,11 @@ module.exports.responseStatus = {
   },
   notFound: {
     code: 404,
-    message: () => ({ message: "Not found" }),
+    message: () => ({ message: 'Not found' }),
   },
   serverError: {
     code: 500,
-    message: () => ({ message: "Server error" }),
+    message: () => ({ message: 'Server error' }),
   },
 };
 
@@ -23,24 +23,24 @@ module.exports.customErrors = {
     return error;
   },
   notAuthorized: () => {
-    const error = new Error("Not Authorized");
+    const error = new Error('Not Authorized');
     error.code = 403;
     return error;
   },
   notFound: () => {
-    const error = new Error("Not Found");
+    const error = new Error('Not Found');
     error.code = 404;
     return error;
   },
   alreadyExist: () => {
-    const error = new Error("Already Exist");
+    const error = new Error('Already Exist');
     error.code = 409;
     return error;
   },
   serverError: () => {
-    const error = new Error("Server Error");
+    const error = new Error('Server Error');
     error.code = 500;
   },
 };
 
-module.exports.serverURL = "mongodb://localhost:27017/aroundb";
+module.exports.serverURL = 'mongodb://localhost:27017/aroundb';
