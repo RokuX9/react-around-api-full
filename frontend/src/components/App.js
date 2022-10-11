@@ -117,7 +117,6 @@ function App() {
 	};
 	const submitDeleteLocation = (e) => {
 		e.preventDefault();
-		console.log(deleteLocationData);
 		api
 			.deleteCard(deleteLocationData)
 			.then(() =>
@@ -213,7 +212,6 @@ function App() {
 				localStorage.setItem("jwt", res.token);
 				api.addTokenHeader(res.token);
 				api.checkTokenValidity().then((res) => {
-					console.log(res);
 					setUserEmail(res.email);
 				});
 				setLoggedIn(true);

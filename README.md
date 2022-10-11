@@ -1,6 +1,28 @@
-# react-around-api-full
-The API of "Around the U.S." with authorization and registration handled by the back-end server.
+# React-Around-API-Full
 
-This repository contains the full API of "Around the U.S." project that features user authorization and user registration and handles cards and users. Please add to this readme:
-* a link to repository with the complete React application which uses this API;
-* a link to the website that hosts your API.
+## Description
+
+This project is a social media app where users can post pictures in cards and interact with them.
+It features full authentication, and users are required to sign up and log in to use the app.
+It uses React for the frontend app and express for the backend, Both hosted on Google Cloud VM
+and using nginx routing the user to the correct location.
+All url are ssl certified by cretbot
+
+## Technologies
+
+- HTML
+- CSS
+- Javascript
+- React
+- Express
+- Winston
+- Celebrate
+- Joi
+- Bcrypt
+- Jsonwebtoken
+- Mongodb
+- mongoose
+
+## Url to the site
+
+https://around-dean.students.nomoredomainssbs.ru/
