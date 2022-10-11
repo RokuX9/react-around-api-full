@@ -23,6 +23,7 @@ All url are ssl certified by cretbot
 - Mongodb
 - mongoose
 
-## Url to the site
+## Url to the site and server
 
-https://around-dean.students.nomoredomainssbs.ru/
+Site url: https://around-dean.students.nomoredomainssbs.ru/
+Server url: https://api.around-dean.students.nomoredomainssbs.ru/
