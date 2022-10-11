@@ -1,7 +1,6 @@
 require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
-const rateLimit = require("express-rate-limiter");
 const mongoose = require("mongoose");
 const { errors } = require("celebrate");
 const { serverURL } = require("./utils/utils");
@@ -16,17 +15,10 @@ const signUpRoute = require("./routes/signUp");
 mongoose.connect(serverURL);
 
 const { PORT = 3000 } = process.env;
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-});
 
 const app = express();
 app.use(cors());
 app.options("*", cors());
-app.use(limiter);
 app.use(express.json());
 app.use(requestLogger);
 
