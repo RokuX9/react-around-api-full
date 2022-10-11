@@ -1,0 +1,53 @@
+.tool-tip {
+	background-color: white;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	row-gap: 32px;
+	height: 330px;
+	width: 430px;
+	border-radius: 10px;
+}
+
+.tool-tip__icon {
+	height: 120px;
+	width: 120px;
+}
+
+.tool-tip__icon_type_success {
+	background-image: url("../images/success.svg");
+}
+
+.tool-tip__icon_type_fail {
+	background-image: url("../images/fail.svg");
+}
+
+.tool-tip__message {
+	color: black;
+	font-size: 24px;
+	font-weight: 900;
+	margin: 0;
+	padding: 0 36px;
+	text-align: center;
+	line-height: 29px;
+}
+
+@media screen and (max-width: 900px) {
+	.tool-tip {
+		height: 308px;
+		width: 280px;
+	}
+
+	.tool-tip__message {
+		font-size: 20px;
+		padding: 0 18px;
+	}
+
+	.tool-tip__close-button {
+		height: 30px;
+		width: 30px;
+		right: 118.57px;
+		line-height: 24px;
+	}
+}

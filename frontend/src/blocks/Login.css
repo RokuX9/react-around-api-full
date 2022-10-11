@@ -1,0 +1,10 @@
+.login {
+	width: 880px;
+	margin: auto;
+	border-radius: 0;
+	background-color: black;
+}
+
+.login__title {
+	color: #ffffff;
+}
