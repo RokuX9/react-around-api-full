@@ -42,7 +42,7 @@ cardSchema.statics.deleteCardByOwnerAndId = function deleteCardByOwnerAndId(
     .orFail(customErrors.notFound())
     .then((card) => (card.owner.toString() === owner
       ? this.findByIdAndDelete(id)
-      : Promise.reject(customErrors.notAuthorized())));
+      : Promise.reject(customErrors.forbidden())));
 };
 
 module.exports = mongoose.model('card', cardSchema);

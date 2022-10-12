@@ -24,6 +24,11 @@ module.exports.customErrors = {
   },
   notAuthorized: () => {
     const error = new Error('Not Authorized');
+    error.code = 401;
+    return error;
+  },
+  forbidden: () => {
+    const error = new Error('Forbidden');
     error.code = 403;
     return error;
   },

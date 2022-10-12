@@ -8,7 +8,7 @@ export const validationObject = {
 };
 
 export const apiObject = {
-	baseUrl: "https://api.around-dean.students.nomoredomainssbs.ru",
+	baseUrl: "http://localhost:3001",
 	headers: {
 		"Content-Type": "application/json",
 	},

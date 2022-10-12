@@ -49,10 +49,20 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => res.status(responseStatus.success.code).send(user))
+    .then((user) => res
+      .status(responseStatus.success.code)
+      .send({
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        email: user.email,
+      }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(customErrors.badRequest(err.message));
+      }
+      if (err.code === 11000) {
+        next(customErrors.alreadyExist());
       }
       next(err);
     });
