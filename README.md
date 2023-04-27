@@ -25,5 +25,5 @@ All url are ssl certified by cretbot
 
 ## Url to the site and server
 
-Site url: https://around-dean.students.nomoredomainssbs.ru/
-Server url: https://api.around-dean.students.nomoredomainssbs.ru/
+Site url: https://www.around-dean.gotroot.pw/
+Server url: https://api.www.around-dean.gotroot.pw//
