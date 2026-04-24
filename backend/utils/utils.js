@@ -48,4 +48,4 @@ module.exports.customErrors = {
   },
 };
 
-module.exports.serverURL = 'mongodb://localhost:27017/aroundb';
+module.exports.serverURL = process.env.MONGO_URI || 'mongodb://localhost:27017/aroundb';

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: around-docker-mongo
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  # Init container to clone the repository at startup
+  init-code:
+    image: alpine:latest
+    container_name: around-docker-init
+    volumes:
+      - app-source:/app
+    command: >
+      sh -c "
+      apk add --no-cache git &&
+      git config --global --add safe.directory /app &&
+      if [ ! -d '/app/.git' ]; then
+        git clone https://github.com/RokuX9/react-around-api-full.git /tmp/repo &&
+        cp -a /tmp/repo/. /app/ &&
+        rm -rf /tmp/repo;
+      else
+        cd /app && git pull;
+      fi
+      "
+
+  backend:
+    image: node:18-alpine
+    container_name: around-docker-backend
+    working_dir: /app/backend
+    volumes:
+      - app-source:/app
+    command: sh -c "npm install && node app.js"
+    environment:
+      - PORT=50001
+      - MONGO_URI=mongodb://mongodb:27017/aroundb
+    ports:
+      - "50001:50001"
+    depends_on:
+      init-code:
+        condition: service_completed_successfully
+      mongodb:
+        condition: service_started
+    restart: unless-stopped
+
+  frontend:
+    image: node:18-alpine
+    container_name: around-docker-frontend
+    working_dir: /app/frontend
+    volumes:
+      - app-source:/app
+    command: sh -c "npm install --legacy-peer-deps && npm run build && npx serve -s build -l 50000"
+    ports:
+      - "50000:50000"
+    depends_on:
+      init-code:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+volumes:
+  app-source:
+  mongo-data:

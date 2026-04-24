@@ -8,7 +8,7 @@ export const validationObject = {
 };
 
 export const apiObject = {
-	baseUrl: "https://api.around-dean.gotroot.pw",
+	baseUrl: "https://api.around.rokux9.com",
 	headers: {
 		"Content-Type": "application/json",
 	},
