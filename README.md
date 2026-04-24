@@ -25,5 +25,5 @@ All url are ssl certified by cretbot
 
 ## Url to the site and server
 
-Site url: https://www.around.rokux9.com/
+Site url: https://around.rokux9.com/
 Server url: https://api.around.rokux9.com//
