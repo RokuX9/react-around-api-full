@@ -8,7 +8,7 @@ export const validationObject = {
 };
 
 export const apiObject = {
-	baseUrl: "https://api.around.rokux9.com",
+	baseUrl: "http://localhost:5000",
 	headers: {
 		"Content-Type": "application/json",
 	},
